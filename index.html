@@ -1126,10 +1126,8 @@
 
 <script>
 // ─── CONFIGURATION ───────────────────────────────────────────
-// Replace with your Cloudflare Worker URL when deployed
-const PROXY_URL = 'https://YOUR-WORKER.workers.dev/fetch';
-// Get a free key at: https://developers.google.com/speed/docs/insights/v5/get-started
-const PSI_API_KEY = 'AIzaSyAN4cDjeUQb9irxugRlj4J8eGyc55k_Ewk';
+// Replace with your Cloudflare Worker URL when deployed. API keys stay in the Worker (secrets), not here.
+const PROXY_URL = 'https://YOUR-WORKER.workers.dev';
 
 // ─── STATE ───────────────────────────────────────────────────
 let auditData = {};
@@ -1187,11 +1185,17 @@ async function runAudit() {
   }
 }
 
-// ─── PAGE SPEED AUDIT (Google PSI API) ──────────────────────
+// ─── PAGE SPEED AUDIT (via Worker — key never exposed in frontend) ─────
 async function runPageSpeedAudit(url) {
-  const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&category=performance&category=seo&category=accessibility&key=${PSI_API_KEY}`;
-
-  const res = await fetch(apiUrl);
+  const workerUrl = PROXY_URL && !PROXY_URL.includes('YOUR-WORKER')
+    ? `${PROXY_URL}?action=pagespeed&url=${encodeURIComponent(url)}`
+    : null;
+  if (!workerUrl) {
+    auditData.psi = null;
+    setFallbackPerformance();
+    return;
+  }
+  const res = await fetch(workerUrl);
 
   if (!res.ok) {
     // Fallback if API key not set or fails

@@ -45,6 +45,29 @@ export default {
 
     const url = new URL(request.url);
     const targetUrl = url.searchParams.get('url');
+    const action = url.searchParams.get('action');
+
+    // ─── PageSpeed API proxy (key stays on server, never in frontend) ───
+    if (action === 'pagespeed') {
+      if (!targetUrl) return corsResponse(JSON.stringify({ error: 'Missing url parameter' }), 400, 'application/json');
+      const psiKey = env.PSI_API_KEY;
+      if (!psiKey) return corsResponse(JSON.stringify({ error: 'PageSpeed API not configured' }), 503, 'application/json');
+      try {
+        const psiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(targetUrl)}&strategy=mobile&category=performance&category=seo&category=accessibility&key=${psiKey}`;
+        const psiRes = await fetch(psiUrl, { signal: AbortSignal.timeout(15000) });
+        const data = await psiRes.json();
+        return new Response(JSON.stringify(data), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'public, max-age=300',
+          },
+        });
+      } catch (e) {
+        return corsResponse(JSON.stringify({ error: e.name === 'TimeoutError' ? 'Request timed out' : 'PageSpeed request failed' }), 502, 'application/json');
+      }
+    }
 
     if (!targetUrl) {
       return corsResponse(JSON.stringify({ error: 'Missing url parameter' }), 400, 'application/json');

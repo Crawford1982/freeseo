@@ -10,3 +10,8 @@ Thumbs.db
 
 # Dependencies (if you add any later)
 node_modules/
+
+# Secrets (never commit)
+.env
+.env.local
+.env.*.local
