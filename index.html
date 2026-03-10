@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Local SEO Audit — Why Isn't My Business on Google? | LocalPulse</title>
+  <meta name="description" content="Free instant local SEO audit for small businesses. Find out exactly why your business isn't showing on Google — no signup required. Get a plain-English report in 30 seconds.">
+  <meta name="keywords" content="free local SEO audit, why isn't my business on Google, local SEO check, Google Business Profile, small business SEO, free SEO tool">
+  <link rel="canonical" href="https://localpulse.co.uk/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Local SEO Audit — Find Out Why You're Not on Google">
+  <meta property="og:description" content="Free instant local SEO audit. No signup. See exactly what's stopping customers from finding you.">
+  <meta property="og:url" content="https://localpulse.co.uk/">
+  <meta property="og:image" content="https://localpulse.co.uk/og-image.png">
+  <meta property="og:locale" content="en_GB">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #0d0d0d;
+      --paper:     #f5f2eb;
+      --cream:     #ede9de;
+      --accent:    #e8451a;
+      --accent2:   #2a5cff;
+      --muted:     #8a8070;
+      --border:    #d4cfc4;
+      --good:      #1a8a4a;
+      --warn:      #c47a00;
+      --bad:       #d43030;
+      --card-bg:   #ffffff;
+      --shadow:    0 2px 20px rgba(13,13,13,0.08);
+      --radius:    12px;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────────────── */
+    h1, h2, h3, h4 { font-family: 'Syne', sans-serif; line-height: 1.1; }
+
+    /* ─── LAYOUT ───────────────────────────────────────────── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* ─── HEADER ───────────────────────────────────────────── */
+    header {
+      padding: 28px 0 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--ink);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      color: var(--paper);
+      font-size: 18px;
+      letter-spacing: -1px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span { color: var(--accent); }
+
+    .header-tag {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ─── HERO ─────────────────────────────────────────────── */
+    .hero {
+      padding: 64px 0 48px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      color: var(--ink);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+      position: relative;
+    }
+
+    .hero h1 em::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0.3;
+      border-radius: 2px;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--good);
+      flex-shrink: 0;
+    }
+
+    /* ─── AUDIT FORM ───────────────────────────────────────── */
+    .audit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--shadow), 0 0 0 4px var(--cream);
+      margin-bottom: 80px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .audit-card { padding: 24px; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    input[type="text"],
+    input[type="url"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      background: var(--paper);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input:focus {
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 3px rgba(42,92,255,0.1);
+      background: #fff;
+    }
+
+    input::placeholder { color: #bbb5a8; }
+
+    .btn-audit {
+      width: 100%;
+      padding: 18px 32px;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-audit:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(232,69,26,0.3);
+    }
+
+    .btn-audit:active { transform: translateY(0); }
+
+    .btn-audit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-icon { font-size: 18px; }
+
+    .form-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+
+    /* ─── LOADING STATE ────────────────────────────────────── */
+    .loading-state {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .loading-state.active { display: block; }
+
+    .loader-ring {
+      width: 56px;
+      height: 56px;
+      border: 3px solid var(--cream);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      margin: 0 auto 24px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .loading-step {
+      font-size: 14px;
+      color: var(--muted);
+      opacity: 0.4;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .loading-step.active {
+      opacity: 1;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .loading-step.done { opacity: 0.6; }
+    .loading-step.done::before { content: '✓'; color: var(--good); }
+    .loading-step:not(.done)::before { content: '·'; }
+    .loading-step.active:not(.done)::before { content: '→'; color: var(--accent); }
+
+    /* ─── RESULTS ──────────────────────────────────────────── */
+    #results {
+      display: none;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    #results.visible { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Score Hero */
+    .score-hero {
+      background: var(--ink);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .score-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.08;
+    }
+
+    .score-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: var(--accent2);
+      opacity: 0.06;
+    }
+
+    .score-business-name {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(245,242,235,0.5);
+      margin-bottom: 16px;
+    }
+
+    .score-circle-wrap {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 20px;
+    }
+
+    .score-ring {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .score-ring svg {
+      transform: rotate(-90deg);
+      width: 140px;
+      height: 140px;
+    }
+
+    .score-ring-bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 8; }
+    .score-ring-fill {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .score-number {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Syne', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .score-number span { font-size: 18px; opacity: 0.6; }
+
+    .score-grade {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .score-summary {
+      font-size: 15px;
+      color: rgba(245,242,235,0.65);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Category Cards */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .cat-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .cat-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      background: var(--cream);
+    }
+
+    .cat-score-pill {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .pill-good  { background: rgba(26,138,74,0.12);  color: var(--good); }
+    .pill-warn  { background: rgba(196,122,0,0.12);  color: var(--warn); }
+    .pill-bad   { background: rgba(212,48,48,0.12);  color: var(--bad); }
+
+    .cat-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .cat-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .cat-bar {
+      height: 4px;
+      background: var(--cream);
+      border-radius: 2px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .cat-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bar-good  { background: var(--good); }
+    .bar-warn  { background: var(--warn); }
+    .bar-bad   { background: var(--bad); }
+
+    /* Issues list */
+    .issues-section {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 40px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .issues-section { padding: 24px 20px; }
+      .score-hero { padding: 36px 24px; }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .issue-count {
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .issue-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .issue-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      border-radius: var(--radius);
+      transition: background 0.15s;
+    }
+
+    .issue-item:hover { background: var(--paper); }
+
+    .issue-status {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .status-good  { background: rgba(26,138,74,0.12);  color: var(--good); }
+    .status-warn  { background: rgba(196,122,0,0.12);  color: var(--warn); }
+    .status-bad   { background: rgba(212,48,48,0.12);  color: var(--bad); }
+
+    .issue-body { flex: 1; min-width: 0; }
+
+    .issue-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .issue-detail {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .issue-fix {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent2);
+      background: rgba(42,92,255,0.08);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* CTA section */
+    .cta-section {
+      background: var(--ink);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 600px) { .cta-section { padding: 36px 24px; } }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.015) 40px,
+        rgba(255,255,255,0.015) 41px
+      );
+    }
+
+    .cta-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(232,69,26,0.15);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      color: rgba(245,242,235,0.6);
+      max-width: 420px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(232,69,26,0.4);
+    }
+
+    .cta-note {
+      font-size: 12px;
+      color: rgba(245,242,235,0.35);
+      margin-top: 14px;
+    }
+
+    /* Restart button */
+    .btn-restart {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 auto 60px;
+      padding: 12px 24px;
+      background: transparent;
+      color: var(--muted);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-restart:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+      background: var(--cream);
+    }
+
+    /* ─── HOW IT WORKS ─────────────────────────────────────── */
+    .how-section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .how-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .how-steps { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    .how-step { text-align: center; }
+
+    .how-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .how-step h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .how-step p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── FOOTER ───────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ─── ERROR STATE ──────────────────────────────────────── */
+    .error-box {
+      display: none;
+      background: rgba(212,48,48,0.06);
+      border: 1.5px solid rgba(212,48,48,0.2);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--bad);
+    }
+
+    .error-box.visible { display: block; }
+
+    /* ─── UTILITY ──────────────────────────────────────────── */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); border: 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 32px 0;
+    }
+
+    /* FAQ & Resources */
+    .faq-section, .resources-section { padding: 48px 0; }
+    .section-head { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; padding: 20px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .faq-q:hover { color: var(--accent); }
+    .faq-q::after { content: '+'; font-size: 20px; color: var(--muted); }
+    .faq-item.open .faq-q::after { content: '−'; }
+    .faq-a { padding: 0 0 20px 0; font-size: 15px; color: var(--muted); line-height: 1.6; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .resource-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+    .resource-card a { font-weight: 600; color: var(--accent2); text-decoration: none; }
+    .resource-card a:hover { text-decoration: underline; }
+    .resource-card p { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+    .affiliate-note { font-size: 12px; color: var(--muted); margin-top: 20px; }
+    .share-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center; margin-top: 24px; }
+    .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink); text-decoration: none; transition: all 0.2s; }
+    .share-btn:hover { border-color: var(--ink); background: var(--card-bg); }
+    .support-footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+    .support-footer a { color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"LocalPulse","url":"https://localpulse.co.uk","description":"Free local SEO audit tool for small businesses. Find out why your business isn't showing on Google."}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why isn't my business showing on Google?","acceptedAnswer":{"@type":"Answer","text":"Usually it's one of: no Google Business Profile (or it's unclaimed), a slow or broken website, missing location keywords and NAP (name, address, phone) on your site, or no local schema markup. Run the free audit above to see exactly what's wrong for your site."}},{"@type":"Question","name":"What is local SEO?","acceptedAnswer":{"@type":"Answer","text":"Local SEO is how you get found when people search for your type of business near them (e.g. plumber Manchester). It relies on your Google Business Profile, your website's speed and structure, and consistent name/address/phone info across the web."}},{"@type":"Question","name":"Is this free local SEO audit really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. No signup, no email required. You get an instant report. We never sell or share your details. If you want someone to fix the issues for you, you can get in touch — that's optional and up to you."}},{"@type":"Question","name":"How do I get my business on Google Maps?","acceptedAnswer":{"@type":"Answer","text":"Claim and complete your Google Business Profile at business.google.com. Add your address, phone, opening hours, photos, and category. Keep it updated. Our audit checks whether your website supports your GBP (e.g. same NAP, schema) so you rank better."}}]}
+  </script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">LP</div>
+        <span class="logo-text">Local<span>Pulse</span></span>
+      </a>
+      <span class="header-tag">Free · No signup</span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Free Local SEO Audit</div>
+    <h1>Find out why your<br>business is <em>invisible</em><br>on Google</h1>
+    <p class="hero-sub">Enter your website and get an instant, plain-English report on exactly what's stopping customers from finding you.</p>
+
+    <div class="hero-badges">
+      <span class="badge"><span class="badge-dot"></span>No signup required</span>
+      <span class="badge"><span class="badge-dot"></span>Results in 30 seconds</span>
+      <span class="badge"><span class="badge-dot"></span>100% free forever</span>
+    </div>
+
+    <!-- AUDIT FORM -->
+    <div class="audit-card" id="auditCard">
+      <div id="formSection">
+        <div class="form-grid">
+          <div class="field">
+            <label for="businessName">Business Name</label>
+            <input type="text" id="businessName" placeholder="e.g. Pete's Plumbing" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="location">Town / City</label>
+            <input type="text" id="location" placeholder="e.g. Manchester" autocomplete="address-level2">
+          </div>
+          <div class="field full">
+            <label for="websiteUrl">Website URL</label>
+            <input type="url" id="websiteUrl" placeholder="https://yourwebsite.com" autocomplete="url">
+          </div>
+        </div>
+
+        <button class="btn-audit" id="runAuditBtn" onclick="runAudit()">
+          <span class="btn-icon">⚡</span>
+          Run Free Audit
+        </button>
+
+        <div class="error-box" id="errorBox"></div>
+        <p class="form-note">We never sell your data or pass your details to third parties.</p>
+      </div>
+
+      <!-- LOADING -->
+      <div class="loading-state" id="loadingState">
+        <div class="loader-ring"></div>
+        <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:20px;">Analysing your site…</p>
+        <div class="loading-steps" id="loadingSteps">
+          <div class="loading-step" id="step1">Checking website performance</div>
+          <div class="loading-step" id="step2">Testing mobile experience</div>
+          <div class="loading-step" id="step3">Scanning SEO signals</div>
+          <div class="loading-step" id="step4">Checking schema markup</div>
+          <div class="loading-step" id="step5">Verifying local signals</div>
+          <div class="loading-step" id="step6">Building your report</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<div id="results">
+  <div class="container">
+
+    <!-- Score Hero -->
+    <div class="score-hero" id="scoreHero">
+      <div class="score-business-name" id="resultBusinessName"></div>
+      <div class="score-circle-wrap">
+        <div class="score-ring">
+          <svg viewBox="0 0 140 140">
+            <circle class="score-ring-bg" cx="70" cy="70" r="58"/>
+            <circle class="score-ring-fill" id="scoreRingFill" cx="70" cy="70" r="58"
+              stroke-dasharray="364.4"
+              stroke-dashoffset="364.4"/>
+          </svg>
+          <div class="score-number"><span id="scoreDisplay">0</span><span>/100</span></div>
+        </div>
+      </div>
+      <div class="score-grade" id="scoreGrade"></div>
+      <p class="score-summary" id="scoreSummary"></p>
+    </div>
+
+    <!-- Category Cards -->
+    <div class="categories" id="categoryCards"></div>
+
+    <!-- Issues -->
+    <div class="issues-section">
+      <div class="section-header">
+        <h2 class="section-title">What We Found</h2>
+        <span class="issue-count" id="issueCount"></span>
+      </div>
+      <div class="issue-list" id="issueList"></div>
+    </div>
+
+    <!-- CTA (you help them — no selling their details) -->
+    <div class="cta-section" id="ctaSection">
+      <span class="cta-label">Want someone to fix this?</span>
+      <h2 id="ctaHeadline">Your website needs work</h2>
+      <p id="ctaBody">I build fast, professional websites for local businesses — starting from £499. Usually live within a week. Your details stay with you; I never sell or pass them on.</p>
+      <a href="mailto:hello@localpulse.co.uk?subject=LocalPulse%20Audit%20%E2%80%94%20I%20need%20help" class="btn-cta">
+        Get in touch for a free quote →
+      </a>
+      <p class="cta-note">No obligation. Tell me your URL and I'll say what I'd do — no spam, no sharing your data.</p>
+      <div class="share-row" id="shareRow">
+        <span style="font-size:13px;color:var(--muted);margin-right:8px;">Share your results:</span>
+        <a class="share-btn" href="#" id="shareTwitter" target="_blank" rel="noopener" aria-label="Share on X">𝕏 Share</a>
+        <a class="share-btn" href="#" id="shareLinkedIn" target="_blank" rel="noopener" aria-label="Share on LinkedIn">LinkedIn</a>
+        <button type="button" class="share-btn" id="shareCopy" style="border:1px solid var(--border);background:var(--cream);cursor:pointer;font-family:inherit;">Copy link</button>
+      </div>
+    </div>
+
+    <!-- Restart -->
+    <button class="btn-restart" onclick="resetTool()">
+      ← Check another business
+    </button>
+
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="howSection">
+  <div class="container">
+    <p class="how-title">How it works</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <h3>Enter your details</h3>
+        <p>Just your business name, location, and website URL. No account needed.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <h3>We run the checks</h3>
+        <p>We test your site speed, mobile experience, SEO signals, and local visibility in real time.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <h3>Get your report</h3>
+        <p>A plain-English score with specific fixes — no jargon, no fluff. Just what to do next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ (SEO + rich snippets) -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <h2 class="section-head">Frequently asked questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Why isn't my business showing on Google?</div>
+        <div class="faq-a">Usually it's one of: no Google Business Profile (or it's unclaimed), a slow or broken website, missing location keywords and NAP (name, address, phone) on your site, or no local schema markup. Run the free audit above to see exactly what's wrong for your site.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What is local SEO?</div>
+        <div class="faq-a">Local SEO is how you get found when people search for your type of business near them (e.g. "plumber Manchester"). It relies on your Google Business Profile, your website's speed and structure, and consistent name/address/phone info across the web.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Is this free local SEO audit really free?</div>
+        <div class="faq-a">Yes. No signup, no email required. You get an instant report. We never sell or share your details. If you want someone to fix the issues for you, you can get in touch — that's optional and up to you.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">How do I get my business on Google Maps?</div>
+        <div class="faq-a">Claim and complete your Google Business Profile at business.google.com. Add your address, phone, opening hours, photos, and category. Keep it updated. Our audit checks whether your website supports your GBP (e.g. same NAP, schema) so you rank better.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Resources / next steps (affiliate-friendly, no data selling) -->
+<section class="resources-section">
+  <div class="container">
+    <h2 class="section-head">What to do next</h2>
+    <p style="margin-bottom:20px;color:var(--muted);font-size:15px;">Free tools and guides that can help. We don't sell your data — these are just useful links.</p>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <a href="https://business.google.com" target="_blank" rel="noopener">Google Business Profile</a>
+        <p>Claim and manage your free listing. The single biggest lever for local search.</p>
+      </div>
+      <div class="resource-card">
+        <a href="https://pagespeed.web.dev" target="_blank" rel="noopener">PageSpeed Insights</a>
+        <p>See how fast your site loads on mobile and desktop. Use alongside this audit.</p>
+      </div>
+      <div class="resource-card">
+        <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console</a>
+        <p>Free. See how Google sees your site and which queries bring impressions.</p>
+      </div>
+      <div class="resource-card">
+        <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Rich Results Test</a>
+        <p>Check if your schema/LocalBusiness markup is valid. Fix errors there.</p>
+      </div>
+    </div>
+    <p class="affiliate-note">We're not paid to list these — they're free official tools. If we add affiliate links in future we'll say so clearly.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2025 LocalPulse. Free to use, always. We never sell or share your data.</span>
+      <div class="footer-links">
+        <a href="mailto:hello@localpulse.co.uk">Contact</a>
+        <a href="#privacy">Privacy</a>
+      </div>
+    </div>
+    <div class="support-footer" id="privacy">
+      <strong>Privacy:</strong> We don't store your audit inputs long-term or pass your details to anyone. The tool runs in your browser and via our proxy; we don't sell leads. If you email us for help, we use that only to reply. <a href="mailto:hello@localpulse.co.uk">Questions?</a><br>
+      This tool is free forever. If it helped you, <a href="mailto:hello@localpulse.co.uk?subject=LocalPulse%20feedback">tell a friend</a> or share your results above — no payment required.
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── CONFIGURATION ───────────────────────────────────────────
+// Replace with your Cloudflare Worker URL when deployed
+const PROXY_URL = 'https://YOUR-WORKER.workers.dev/fetch';
+// Get a free key at: https://developers.google.com/speed/docs/insights/v5/get-started
+const PSI_API_KEY = 'AIzaSyAN4cDjeUQb9irxugRlj4J8eGyc55k_Ewk';
+
+// ─── STATE ───────────────────────────────────────────────────
+let auditData = {};
+
+// ─── MAIN AUDIT FUNCTION ─────────────────────────────────────
+async function runAudit() {
+  const businessName = document.getElementById('businessName').value.trim();
+  const location     = document.getElementById('location').value.trim();
+  const websiteUrl   = document.getElementById('websiteUrl').value.trim();
+
+  // Validation
+  if (!websiteUrl) return showError('Please enter your website URL.');
+  const url = normaliseUrl(websiteUrl);
+  if (!url) return showError('Please enter a valid website URL (e.g. https://yoursite.com)');
+
+  hideError();
+  showLoading();
+
+  auditData = { businessName, location, url, issues: [], categories: {} };
+
+  try {
+    // Run all checks concurrently where possible
+    await stepProgress(1, async () => {
+      await runPageSpeedAudit(url);
+    });
+
+    await stepProgress(2, async () => {
+      // Mobile already from PSI — just process
+      await delay(400);
+    });
+
+    await stepProgress(3, async () => {
+      await runSeoChecks(url);
+    });
+
+    await stepProgress(4, async () => {
+      await runSchemaCheck(url);
+    });
+
+    await stepProgress(5, async () => {
+      await runLocalSignalsCheck(url, businessName, location);
+    });
+
+    await stepProgress(6, async () => {
+      await delay(500);
+      calculateFinalScore();
+    });
+
+    showResults();
+
+  } catch (err) {
+    console.error(err);
+    hideLoading();
+    showError('Something went wrong. Please check the URL and try again.');
+  }
+}
+
+// ─── PAGE SPEED AUDIT (Google PSI API) ──────────────────────
+async function runPageSpeedAudit(url) {
+  const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&category=performance&category=seo&category=accessibility&key=${PSI_API_KEY}`;
+
+  const res = await fetch(apiUrl);
+
+  if (!res.ok) {
+    // Fallback if API key not set or fails
+    auditData.psi = null;
+    setFallbackPerformance();
+    return;
+  }
+
+  const data = await res.json();
+  auditData.psi = data;
+
+  const lh = data.lighthouseResult;
+  if (!lh) { setFallbackPerformance(); return; }
+
+  // Performance score (0-1 → 0-100)
+  const perfScore = Math.round((lh.categories?.performance?.score || 0) * 100);
+  const seoScore  = Math.round((lh.categories?.seo?.score || 0) * 100);
+  const a11y      = Math.round((lh.categories?.accessibility?.score || 0) * 100);
+
+  auditData.perfScore = perfScore;
+  auditData.seoScore  = seoScore;
+  auditData.a11y      = a11y;
+
+  const audits = lh.audits || {};
+
+  // Page speed
+  const fcp = audits['first-contentful-paint']?.displayValue || 'Unknown';
+  const lcp = audits['largest-contentful-paint']?.displayValue || 'Unknown';
+  const tbt = audits['total-blocking-time']?.displayValue || 'Unknown';
+  const cls = audits['cumulative-layout-shift']?.displayValue || 'Unknown';
+
+  auditData.fcp = fcp;
+  auditData.lcp = lcp;
+
+  // Issues from PSI
+  if (perfScore < 50) {
+    addIssue('bad', 'performance', 'Slow website speed',
+      `Your site scores ${perfScore}/100 for speed. Google penalises slow sites and visitors leave before it loads. LCP: ${lcp}`,
+      'Compress images, enable caching, consider faster hosting');
+  } else if (perfScore < 80) {
+    addIssue('warn', 'performance', 'Website speed could be better',
+      `Speed score: ${perfScore}/100. LCP: ${lcp}. Some visitors may be dropping off on slow connections.`,
+      'Optimise images and review your hosting plan');
+  } else {
+    addIssue('good', 'performance', 'Good website speed',
+      `Speed score: ${perfScore}/100. Your site loads well for most visitors.`);
+  }
+
+  // Mobile
+  const viewport = audits['viewport']?.score;
+  const mobileFriendly = viewport === 1 || viewport === null;
+  if (!mobileFriendly) {
+    addIssue('bad', 'mobile', 'Not mobile friendly',
+      'Your site doesn\'t have a proper mobile viewport. Over 60% of local searches happen on phones.',
+      'Add a viewport meta tag and use responsive CSS');
+  } else {
+    addIssue('good', 'mobile', 'Mobile friendly',
+      'Your site has a proper mobile viewport set.');
+  }
+
+  // HTTPS
+  const isHttps = url.startsWith('https://');
+  if (!isHttps) {
+    addIssue('bad', 'technical', 'No SSL certificate (not HTTPS)',
+      'Your site uses HTTP instead of HTTPS. Google flags this as "Not Secure" and penalises rankings.',
+      'Install a free SSL certificate — most hosts provide this');
+  } else {
+    addIssue('good', 'technical', 'HTTPS / SSL active',
+      'Your site uses a secure connection. Good.');
+  }
+
+  // Title tag
+  const titleEl = audits['document-title'];
+  if (titleEl?.score === 0) {
+    addIssue('bad', 'seo', 'Missing page title',
+      'Your homepage has no title tag. This is one of the most important SEO signals for Google.',
+      'Add a descriptive title tag including your business type and location');
+  } else {
+    const titleText = lh.finalUrl ? extractFromMeta(auditData.psi, 'title') : null;
+    addIssue('good', 'seo', 'Page title present',
+      titleText ? `Title: "${titleText}"` : 'Your page has a title tag set.');
+  }
+
+  // Meta description
+  const metaDesc = audits['meta-description'];
+  if (metaDesc?.score === 0) {
+    addIssue('warn', 'seo', 'Missing meta description',
+      'No meta description found. This is the text Google shows in search results — it affects click-through rate.',
+      'Write a 150-160 character description including your location and what you do');
+  } else {
+    addIssue('good', 'seo', 'Meta description present',
+      'Your site has a meta description for search results.');
+  }
+
+  // Image alt text
+  const imgAlt = audits['image-alt'];
+  if (imgAlt?.score === 0) {
+    addIssue('warn', 'seo', 'Images missing alt text',
+      'Some images have no alt text. This hurts accessibility and SEO — Google can\'t understand untagged images.',
+      'Add descriptive alt text to all images, including location where relevant');
+  }
+
+  // Links
+  const linkText = audits['link-text'];
+  if (linkText?.score === 0) {
+    addIssue('warn', 'technical', 'Non-descriptive link text',
+      'Some links say "click here" or "read more". Descriptive links help Google understand your site structure.',
+      'Use descriptive anchor text like "View our plumbing services"');
+  }
+
+  // Category scores
+  auditData.categories.performance = perfScore;
+  auditData.categories.seo = seoScore;
+}
+
+// ─── SEO CHECKS ──────────────────────────────────────────────
+async function runSeoChecks(url) {
+  try {
+    // Try to fetch the page via proxy
+    const html = await fetchViaProxy(url);
+    if (!html) {
+      // If no proxy set up, use PSI data only
+      await delay(300);
+      return;
+    }
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    // H1 check
+    const h1s = doc.querySelectorAll('h1');
+    if (h1s.length === 0) {
+      addIssue('bad', 'seo', 'No H1 heading',
+        'Your homepage has no H1 heading. This is a primary signal Google uses to understand what your page is about.',
+        'Add one H1 tag that clearly states your business type and location');
+    } else if (h1s.length > 1) {
+      addIssue('warn', 'seo', 'Multiple H1 headings',
+        `Found ${h1s.length} H1 tags. There should only be one. This dilutes your main keyword signal.`,
+        'Keep one H1 with your main business descriptor');
+    } else {
+      addIssue('good', 'seo', 'H1 heading present',
+        `H1: "${h1s[0].textContent.trim().substring(0, 80)}"`);
+    }
+
+    // Phone number
+    const bodyText = doc.body?.innerText || doc.body?.textContent || '';
+    const phoneRegex = /(\+44|0)[0-9\s\-\(\)]{9,15}/;
+    const hasPhone = phoneRegex.test(bodyText);
+    if (!hasPhone) {
+      addIssue('warn', 'local', 'No phone number found on page',
+        'We couldn\'t find a phone number on your homepage. Local customers need to call you easily, and it\'s a local SEO signal.',
+        'Add your phone number prominently in the header or hero section');
+    } else {
+      addIssue('good', 'local', 'Phone number on page',
+        'Your phone number is visible on the page.');
+    }
+
+    // Address / location
+    const locationWords = ['street', 'road', 'avenue', 'lane', 'place', 'drive', 'close'];
+    const hasAddress = locationWords.some(w => bodyText.toLowerCase().includes(w));
+    if (!hasAddress) {
+      addIssue('warn', 'local', 'No address found on page',
+        'We couldn\'t find a physical address. NAP consistency (Name, Address, Phone) is a key local ranking factor.',
+        'Add your full address to your footer or contact page');
+    } else {
+      addIssue('good', 'local', 'Address present on page',
+        'Your site appears to have address information.');
+    }
+
+    // CTA check
+    const ctaTerms = ['contact', 'call', 'get in touch', 'book', 'quote', 'enquire', 'request'];
+    const hasCta = ctaTerms.some(t => bodyText.toLowerCase().includes(t));
+    if (!hasCta) {
+      addIssue('warn', 'seo', 'No clear call-to-action',
+        'We couldn\'t find obvious calls to action. Without them, visitors don\'t know what to do next.',
+        'Add prominent "Call us" or "Get a quote" buttons');
+    }
+
+    // Sitemap
+    await checkSitemap(url);
+
+    // robots.txt
+    await checkRobots(url);
+
+  } catch (e) {
+    // Proxy not available or failed — skip HTML checks gracefully
+    await delay(200);
+  }
+}
+
+// ─── SCHEMA CHECK ────────────────────────────────────────────
+async function runSchemaCheck(url) {
+  try {
+    const html = await fetchViaProxy(url);
+    if (!html) {
+      addIssue('warn', 'technical', 'Schema markup — could not check',
+        'We were unable to scan for schema markup. Use Google\'s Rich Results Test to check manually.',
+        'Visit search.google.com/test/rich-results to test your schema');
+      return;
+    }
+
+    const hasLocalBusiness = html.includes('"LocalBusiness"') || html.includes('"localBusiness"') ||
+                             html.includes('@type":"LocalBusiness') ||
+                             html.includes("'LocalBusiness'");
+
+    const hasSchema = html.includes('application/ld+json') || html.includes('itemscope') ||
+                      html.includes('schema.org');
+
+    if (hasLocalBusiness) {
+      addIssue('good', 'technical', 'LocalBusiness schema markup present',
+        'Your site has structured data telling Google you\'re a local business. Excellent.');
+      auditData.hasLocalSchema = true;
+    } else if (hasSchema) {
+      addIssue('warn', 'technical', 'Schema markup present but not LocalBusiness type',
+        'Your site has some structured data, but doesn\'t use the LocalBusiness schema type that directly helps local SEO.',
+        'Add LocalBusiness JSON-LD schema with your name, address, phone, and opening hours');
+    } else {
+      addIssue('bad', 'technical', 'No schema markup found',
+        'Your site has no structured data. Schema markup helps Google understand your business type, location, and services.',
+        'Add LocalBusiness JSON-LD schema — we can do this for you');
+      auditData.hasLocalSchema = false;
+    }
+  } catch (e) {
+    addIssue('warn', 'technical', 'Schema markup — could not check',
+      'We were unable to scan your site for schema markup.',
+      'Use search.google.com/test/rich-results to check manually');
+  }
+}
+
+// ─── LOCAL SIGNALS CHECK ─────────────────────────────────────
+async function runLocalSignalsCheck(url, businessName, location) {
+  const domain = extractDomain(url);
+
+  // Check if Google Maps embed or mention exists
+  try {
+    const html = await fetchViaProxy(url);
+    if (html) {
+      const hasGoogleMap = html.includes('maps.google') || html.includes('google.com/maps') ||
+                           html.includes('goo.gl/maps');
+      if (hasGoogleMap) {
+        addIssue('good', 'local', 'Google Maps embedded',
+          'Your site has a Google Maps embed. This is a positive local SEO signal.');
+      } else {
+        addIssue('warn', 'local', 'No Google Maps embed',
+          'Embedding a Google Map on your contact page helps local SEO and helps customers find you.',
+          'Add a Google Maps embed to your contact or footer section');
+      }
+
+      // Open Graph tags
+      const hasOg = html.includes('og:title') || html.includes('property="og:');
+      if (!hasOg) {
+        addIssue('warn', 'seo', 'No Open Graph tags',
+          'Missing Open Graph tags mean your site looks poor when shared on Facebook, WhatsApp, and other platforms.',
+          'Add og:title, og:description, and og:image tags');
+      } else {
+        addIssue('good', 'seo', 'Open Graph tags present',
+          'Your site will display correctly when shared on social media.');
+      }
+    }
+  } catch(e) {}
+
+  // Google Business Profile hint
+  addIssue('warn', 'local', 'Google Business Profile — not checked',
+    'We can\'t automatically check your GBP without you connecting it. This is the single most important factor for appearing in Google Maps.',
+    'Claim and complete your Google Business Profile at business.google.com');
+
+  // Category score for local
+  const localIssues = auditData.issues.filter(i => i.category === 'local');
+  const localGood = localIssues.filter(i => i.status === 'good').length;
+  auditData.categories.local = Math.round((localGood / Math.max(localIssues.length, 1)) * 100);
+}
+
+// ─── SITEMAP & ROBOTS ────────────────────────────────────────
+async function checkSitemap(url) {
+  const base = getBaseUrl(url);
+  try {
+    const res = await fetch(`${base}/sitemap.xml`, { method: 'HEAD', mode: 'no-cors' });
+    // no-cors will succeed for existing resources
+    addIssue('good', 'technical', 'Sitemap.xml likely present',
+      'A sitemap helps Google discover and index all your pages.');
+  } catch(e) {
+    addIssue('warn', 'technical', 'Sitemap.xml — could not confirm',
+      'We couldn\'t verify your sitemap. Without one, Google may miss some of your pages.',
+      'Create and submit a sitemap via Google Search Console');
+  }
+}
+
+async function checkRobots(url) {
+  const base = getBaseUrl(url);
+  try {
+    const res = await fetch(`${base}/robots.txt`, { mode: 'no-cors' });
+    addIssue('good', 'technical', 'robots.txt present',
+      'Your site has a robots.txt file helping guide search engine crawlers.');
+  } catch(e) {
+    // Neutral — robots.txt is optional
+  }
+}
+
+// ─── SCORE CALCULATION ───────────────────────────────────────
+function calculateFinalScore() {
+  const issues = auditData.issues;
+  const good = issues.filter(i => i.status === 'good').length;
+  const warn = issues.filter(i => i.status === 'warn').length;
+  const bad  = issues.filter(i => i.status === 'bad').length;
+  const total = issues.length;
+
+  if (total === 0) { auditData.finalScore = 50; return; }
+
+  // Weighted: good=1, warn=0.4, bad=0
+  const weighted = (good + warn * 0.4) / total;
+  auditData.finalScore = Math.round(weighted * 100);
+
+  // Category scores
+  const cats = ['performance', 'seo', 'local', 'technical', 'mobile'];
+  cats.forEach(cat => {
+    if (auditData.categories[cat] === undefined) {
+      const catIssues = issues.filter(i => i.category === cat);
+      if (catIssues.length > 0) {
+        const catGood = catIssues.filter(i => i.status === 'good').length;
+        const catWarn = catIssues.filter(i => i.status === 'warn').length;
+        auditData.categories[cat] = Math.round(((catGood + catWarn * 0.5) / catIssues.length) * 100);
+      } else {
+        auditData.categories[cat] = 70; // neutral default
+      }
+    }
+  });
+}
+
+// ─── SHOW RESULTS ────────────────────────────────────────────
+function showResults() {
+  hideLoading();
+
+  const score = auditData.finalScore;
+  const name = auditData.businessName || auditData.url;
+
+  // Business name
+  document.getElementById('resultBusinessName').textContent =
+    auditData.businessName ? `${auditData.businessName}${auditData.location ? ' · ' + auditData.location : ''}` : auditData.url;
+
+  // Score ring
+  const circumference = 364.4;
+  const offset = circumference - (score / 100) * circumference;
+  const ring = document.getElementById('scoreRingFill');
+
+  let ringColor, gradeText, summaryText, ctaHeadline, ctaBody;
+
+  if (score >= 75) {
+    ringColor = '#1a8a4a';
+    gradeText = 'Looking Good';
+    summaryText = `Your site is performing well in several areas. There are still improvements that could help more customers find you.`;
+    ctaHeadline = 'Want to push further?';
+    ctaBody = 'Your site has a solid foundation. We can help you dominate local search and build a site that converts visitors into customers.';
+  } else if (score >= 50) {
+    ringColor = '#c47a00';
+    gradeText = 'Needs Attention';
+    summaryText = `Your site has some issues that are likely costing you customers. The good news — most of these are fixable quickly.`;
+    ctaHeadline = 'These issues are costing you customers';
+    ctaBody = 'We build fast, professional websites for local businesses that fix all of these issues — starting from £499.';
+  } else {
+    ringColor = '#d43030';
+    gradeText = 'Critical Issues Found';
+    summaryText = `Your site has several problems that are almost certainly preventing customers from finding you on Google. These need fixing.`;
+    ctaHeadline = 'Your website is losing you business';
+    ctaBody = 'We can build you a fast, fully-optimised local business website that fixes everything above — starting from £499, usually live within a week.';
+  }
+
+  ring.style.stroke = ringColor;
+  ring.style.strokeDashoffset = offset;
+
+  // Animate score number
+  animateNumber('scoreDisplay', 0, score, 1200);
+
+  document.getElementById('scoreGrade').textContent = gradeText;
+  document.getElementById('scoreSummary').textContent = summaryText;
+  document.getElementById('ctaHeadline').textContent = ctaHeadline;
+  document.getElementById('ctaBody').textContent = ctaBody;
+
+  // Category cards
+  renderCategoryCards();
+
+  // Issues list
+  renderIssues();
+
+  // Show results, hide form
+  document.getElementById('auditCard').style.display = 'none';
+  document.getElementById('howSection').style.display = 'none';
+  document.getElementById('results').classList.add('visible');
+
+  setupShareButtons(score, name);
+  // Scroll to results
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function setupShareButtons(score, businessName) {
+  const pageUrl = encodeURIComponent(window.location.href);
+  const text = score !== undefined
+    ? `I just ran a free local SEO audit — ${businessName || 'My site'} scored ${score}/100. Find out why you're not on Google:`
+    : 'Free local SEO audit — find out why your business isn\'t showing on Google';
+  const tweetText = encodeURIComponent(text);
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&url=${pageUrl}`;
+  const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+  const twitterEl = document.getElementById('shareTwitter');
+  const linkedInEl = document.getElementById('shareLinkedIn');
+  const copyEl = document.getElementById('shareCopy');
+  if (twitterEl) twitterEl.href = twitterUrl;
+  if (linkedInEl) linkedInEl.href = linkedInUrl;
+  if (copyEl) {
+    copyEl.onclick = function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        copyEl.textContent = 'Copied!';
+        setTimeout(function() { copyEl.textContent = 'Copy link'; }, 2000);
+      });
+    };
+  }
+}
+
+function renderCategoryCards() {
+  const defs = [
+    { key: 'performance', icon: '⚡', name: 'Speed',         desc: 'How fast your site loads for visitors' },
+    { key: 'seo',         icon: '🔍', name: 'SEO Signals',   desc: 'On-page signals Google uses to rank you' },
+    { key: 'local',       icon: '📍', name: 'Local Presence',desc: 'Signals that help you appear in local results' },
+    { key: 'technical',   icon: '🛠', name: 'Technical',     desc: 'Under-the-hood factors affecting crawlability' },
+    { key: 'mobile',      icon: '📱', name: 'Mobile',        desc: 'Experience for smartphone users' },
+  ];
+
+  const container = document.getElementById('categoryCards');
+  container.innerHTML = '';
+
+  defs.forEach(def => {
+    const score = auditData.categories[def.key] ?? 60;
+    const { pillClass, barClass, label } = scoreToClass(score);
+
+    container.innerHTML += `
+      <div class="cat-card">
+        <div class="cat-header">
+          <div class="cat-icon">${def.icon}</div>
+          <span class="cat-score-pill ${pillClass}">${label}</span>
+        </div>
+        <div class="cat-name">${def.name}</div>
+        <div class="cat-desc">${def.desc}</div>
+        <div class="cat-bar">
+          <div class="cat-bar-fill ${barClass}" style="width:0%" data-width="${score}%"></div>
+        </div>
+      </div>`;
+  });
+
+  // Animate bars
+  setTimeout(() => {
+    document.querySelectorAll('.cat-bar-fill').forEach(el => {
+      el.style.width = el.dataset.width;
+    });
+  }, 100);
+}
+
+function renderIssues() {
+  const issues = auditData.issues;
+  const container = document.getElementById('issueList');
+  const countEl   = document.getElementById('issueCount');
+
+  // Sort: bad first, then warn, then good
+  const sorted = [...issues].sort((a,b) => {
+    const order = { bad: 0, warn: 1, good: 2 };
+    return order[a.status] - order[b.status];
+  });
+
+  const badCount  = issues.filter(i => i.status === 'bad').length;
+  const warnCount = issues.filter(i => i.status === 'warn').length;
+
+  countEl.textContent = `${badCount} critical · ${warnCount} warnings`;
+
+  container.innerHTML = sorted.map(issue => `
+    <div class="issue-item">
+      <div class="issue-status status-${issue.status}">
+        ${issue.status === 'good' ? '✓' : issue.status === 'warn' ? '!' : '✕'}
+      </div>
+      <div class="issue-body">
+        <div class="issue-title">${issue.title}</div>
+        <div class="issue-detail">${issue.detail}</div>
+        ${issue.fix ? `<span class="issue-fix">Fix: ${issue.fix}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────
+function addIssue(status, category, title, detail, fix) {
+  // Deduplicate by title
+  if (!auditData.issues.find(i => i.title === title)) {
+    auditData.issues.push({ status, category, title, detail: detail || '', fix: fix || null });
+  }
+}
+
+function scoreToClass(score) {
+  if (score >= 75) return { pillClass: 'pill-good', barClass: 'bar-good', label: 'Good' };
+  if (score >= 45) return { pillClass: 'pill-warn', barClass: 'bar-warn', label: 'Fair' };
+  return { pillClass: 'pill-bad', barClass: 'bar-bad', label: 'Poor' };
+}
+
+function setFallbackPerformance() {
+  auditData.perfScore = 50;
+  auditData.seoScore  = 50;
+  addIssue('warn', 'performance', 'Speed data unavailable',
+    'We couldn\'t retrieve full performance data. Try the Google PageSpeed Insights tool directly for a detailed speed report.',
+    'Visit pagespeed.web.dev to check your site speed');
+}
+
+async function fetchViaProxy(url) {
+  if (!PROXY_URL || PROXY_URL.includes('YOUR-WORKER')) return null;
+  try {
+    const res = await fetch(`${PROXY_URL}?url=${encodeURIComponent(url)}`);
+    if (!res.ok) return null;
+    return await res.text();
+  } catch(e) {
+    return null;
+  }
+}
+
+function normaliseUrl(url) {
+  try {
+    if (!url.startsWith('http://') && !url.startsWith('https://')) url = 'https://' + url;
+    const u = new URL(url);
+    return u.href;
+  } catch(e) { return null; }
+}
+
+function getBaseUrl(url) {
+  try { const u = new URL(url); return `${u.protocol}//${u.host}`; }
+  catch(e) { return url; }
+}
+
+function extractDomain(url) {
+  try { return new URL(url).hostname.replace('www.',''); }
+  catch(e) { return url; }
+}
+
+function extractFromMeta(psiData, type) {
+  try {
+    const items = psiData?.lighthouseResult?.audits?.['document-title']?.details?.items;
+    return items?.[0]?.title || null;
+  } catch(e) { return null; }
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function animateNumber(id, from, to, duration) {
+  const el = document.getElementById(id);
+  const start = performance.now();
+  function update(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(from + (to - from) * ease);
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// ─── LOADING UI ──────────────────────────────────────────────
+let stepIndex = 0;
+
+async function stepProgress(stepNum, fn) {
+  const el = document.getElementById(`step${stepNum}`);
+  if (el) el.classList.add('active');
+  await fn();
+  if (el) { el.classList.remove('active'); el.classList.add('done'); }
+}
+
+function showLoading() {
+  document.getElementById('formSection').style.display = 'none';
+  document.getElementById('loadingState').classList.add('active');
+  document.getElementById('runAuditBtn').disabled = true;
+}
+
+function hideLoading() {
+  document.getElementById('loadingState').classList.remove('active');
+}
+
+function showError(msg) {
+  const el = document.getElementById('errorBox');
+  el.textContent = msg;
+  el.classList.add('visible');
+  document.getElementById('runAuditBtn').disabled = false;
+}
+
+function hideError() {
+  document.getElementById('errorBox').classList.remove('visible');
+}
+
+function resetTool() {
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('auditCard').style.display = 'block';
+  document.getElementById('howSection').style.display = 'block';
+  document.getElementById('formSection').style.display = 'block';
+  document.getElementById('loadingState').classList.remove('active');
+  document.getElementById('runAuditBtn').disabled = false;
+
+  // Reset loading steps
+  for (let i = 1; i <= 6; i++) {
+    const el = document.getElementById(`step${i}`);
+    if (el) { el.classList.remove('active', 'done'); }
+  }
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  auditData = {};
+}
+
+// ─── ENTER KEY ───────────────────────────────────────────────
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !document.getElementById('runAuditBtn').disabled) {
+    runAudit();
+  }
+});
+</script>
+</body>
+</html>
