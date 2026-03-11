@@ -1254,9 +1254,9 @@ async function runPageSpeedAudit(url) {
       `Speed score: ${perfScore}/100. Your site loads well for most visitors.`);
   }
 
-  // Mobile
+  // Mobile (PSI sometimes omits viewport audit; treat missing as pass)
   const viewport = audits['viewport']?.score;
-  const mobileFriendly = viewport === 1 || viewport === null;
+  const mobileFriendly = viewport !== 0;
   if (!mobileFriendly) {
     addIssue('bad', 'mobile', 'Not mobile friendly',
       'Your site doesn\'t have a proper mobile viewport. Over 60% of local searches happen on phones.',
