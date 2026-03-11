@@ -1,5 +1,5 @@
 /**
- * LocalPulse — Cloudflare Worker Proxy
+ * MySiteAudit — Cloudflare Worker Proxy
  * ─────────────────────────────────────
  * Deploy this at: https://workers.cloudflare.com
  * Free tier: 100,000 requests/day
@@ -12,13 +12,19 @@
  * 2. Create a new Worker
  * 3. Paste this entire file
  * 4. Deploy
- * 5. Copy the worker URL (e.g. https://localpulse-proxy.yourname.workers.dev)
+ * 5. Copy the worker URL (e.g. https://mysiteaudit-proxy.yourname.workers.dev)
  * 6. Paste it into index.html as the PROXY_URL value
+ * 7. In the Worker settings, add a secret named PSI_API_KEY with your PageSpeed Insights API key. Never hardcode the key in this file.
  */
 
-// Allowed origins — update with your GitHub Pages domain
+// PageSpeed Insights API key comes from the Worker secret PSI_API_KEY.
+// For local testing only, you may temporarily paste a key here — but remove it before committing.
+const PSI_API_KEY = '';
+
+// Allowed origins — update with your production domain
 const ALLOWED_ORIGINS = [
-  'https://yourusername.github.io',   // ← update this
+  'https://mysiteaudit.co.uk',
+  'https://www.mysiteaudit.co.uk',
   'http://localhost',
   'http://127.0.0.1',
   'null', // local file:// testing
@@ -50,7 +56,7 @@ export default {
     // ─── PageSpeed API proxy (key stays on server, never in frontend) ───
     if (action === 'pagespeed') {
       if (!targetUrl) return corsResponse(JSON.stringify({ error: 'Missing url parameter' }), 400, 'application/json');
-      const psiKey = env.PSI_API_KEY;
+      const psiKey = env.PSI_API_KEY || PSI_API_KEY;
       if (!psiKey) return corsResponse(JSON.stringify({ error: 'PageSpeed API not configured' }), 503, 'application/json');
       try {
         const psiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(targetUrl)}&strategy=mobile&category=performance&category=seo&category=accessibility&key=${psiKey}`;
@@ -101,7 +107,7 @@ export default {
     try {
       const response = await fetch(targetUrl, {
         headers: {
-          'User-Agent': 'LocalPulse-SEO-Audit/1.0 (https://localpulse.co.uk)',
+          'User-Agent': 'MySiteAudit-SEO-Audit/1.0 (https://mysiteaudit.co.uk)',
           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
           'Accept-Language': 'en-GB,en;q=0.5',
         },
@@ -126,7 +132,7 @@ export default {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, OPTIONS',
           'Cache-Control': 'public, max-age=300', // Cache for 5 min
-          'X-Proxied-By': 'LocalPulse-Worker',
+          'X-Proxied-By': 'MySiteAudit-Worker',
         },
       });
 

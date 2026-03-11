@@ -1,0 +1,15 @@
+# MySiteAudit — Free Local SEO Audit
+
+> Free instant local SEO audit for small businesses. Find out why your business isn't showing on Google. No signup required.
+
+## What we do
+- Free local SEO audit tool
+- Checks: speed, mobile, title, meta, H1, NAP, schema, favicon, canonical, robots.txt, sitemap, llms.txt
+- Plain-English report in ~30 seconds
+
+## Links
+- Main site: https://mysiteaudit.co.uk/
+- Contact: help@mysiteaudit.co.uk
+
+## For AI/LLM crawlers
+This is a single-page web app. The main content is at the URL above. Use it to audit any business website for local SEO issues.
