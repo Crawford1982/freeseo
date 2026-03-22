@@ -44,11 +44,29 @@ You only need **two** things for the audit to work end-to-end.
 
 ---
 
+## 3. Formspree (optional — “Email me this report” after an audit)
+
+**What it does:** Sends the visitor’s email plus business name, URL, and audit score to your inbox when they use **Email me this report** on the results screen.
+
+**Steps:**
+
+1. Sign up at [formspree.io](https://formspree.io) (free tier is enough to start).
+2. Create a **new form** and note the endpoint URL (looks like `https://formspree.io/f/xxxxxxxx`).
+3. In **`index.html`**, set `FORMSPREE_ENDPOINT` to that exact URL (search for `FORMSPREE_ENDPOINT` near the top of the main `<script>` block).
+4. In Formspree: **Form settings → Restrict to domain** — add `https://mysiteaudit.co.uk` and, if you test locally, `http://localhost:3000` or your dev URL (Formspree blocks cross-origin posts from unknown domains otherwise).
+
+**Cost:** Free tier has limits; upgrade if you get a lot of submissions.
+
+**If you don’t set it:** Change `FORMSPREE_ENDPOINT` to a placeholder or remove the email block — the rest of the audit still works.
+
+---
+
 ## Summary
 
 | What              | Where to get it                    | Where to put it                    |
 |-------------------|------------------------------------|------------------------------------|
 | PSI API key       | Google Cloud Console                    | As Worker secret `PSI_API_KEY` in Cloudflare |
 | Worker URL        | workers.cloudflare.com → paste Worker code → Deploy → copy URL | `index.html` → `PROXY_URL`         |
+| Formspree form URL | formspree.io → copy form endpoint | `index.html` → `FORMSPREE_ENDPOINT` |
 
-No other APIs or keys are required. After setting these two, run an audit and you should get full speed + on-page + local checks.
+After setting the Worker + PSI key, run an audit for full speed + on-page + local checks. Add Formspree when you want email capture from the results screen.

@@ -1062,7 +1062,7 @@
       <h3>Email me this report</h3>
       <p>Get a copy of your audit results in your inbox — plus a short plain-English guide on what to fix first.</p>
       <form class="email-form" id="emailCaptureForm"
-            action="https://formspree.io/f/xkoqlgpe"
+            action=""
             method="POST">
         <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
         <input type="hidden" name="business_name" id="hiddenBusiness">
@@ -1208,6 +1208,10 @@
 // ─── CONFIGURATION ───────────────────────────────────────────
 // Replace with your Cloudflare Worker URL when deployed. API keys stay in the Worker (secrets), not here.
 const PROXY_URL = 'https://seofree.1982crawford.workers.dev/fetch';
+
+// Formspree — create a form at https://formspree.io → copy your form endpoint and paste below.
+// In Formspree: add https://mysiteaudit.co.uk (and localhost for testing) under Form settings → Restrict to domain.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkoqlgpe';
 
 // ─── STATE ───────────────────────────────────────────────────
 let auditData = {};
@@ -1781,24 +1785,36 @@ function setupShareButtons(score, businessName) {
   const hiddenScore = document.getElementById('hiddenScore');
   if (hiddenBusiness) hiddenBusiness.value = auditData.businessName || '';
   if (hiddenUrl) hiddenUrl.value = auditData.url || '';
-  if (hiddenScore) hiddenScore.value = auditData.overallScore || '';
+  if (hiddenScore) hiddenScore.value = (auditData.finalScore != null ? String(auditData.finalScore) : '');
 
   // Formspree AJAX submission (no page reload)
   const emailForm = document.getElementById('emailCaptureForm');
   const emailSuccess = document.getElementById('emailSuccess');
-  if (emailForm) {
+  if (emailForm && !emailForm.dataset.spreeBound) {
+    emailForm.dataset.spreeBound = '1';
+    emailForm.setAttribute('action', FORMSPREE_ENDPOINT);
     emailForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(emailForm);
-      fetch(emailForm.action, {
+      fetch(FORMSPREE_ENDPOINT, {
         method: 'POST', body: formData,
         headers: { 'Accept': 'application/json' }
       }).then(function(res) {
         if (res.ok) {
           emailForm.style.display = 'none';
           if (emailSuccess) emailSuccess.style.display = 'block';
+        } else if (emailSuccess) {
+          emailSuccess.textContent = 'Something went wrong — please try again or email help@mysiteaudit.co.uk';
+          emailSuccess.style.display = 'block';
+          emailSuccess.style.color = 'var(--bad)';
         }
-      }).catch(function() {});
+      }).catch(function() {
+        if (emailSuccess) {
+          emailSuccess.textContent = 'Couldn\'t send — check your connection or email help@mysiteaudit.co.uk';
+          emailSuccess.style.display = 'block';
+          emailSuccess.style.color = 'var(--bad)';
+        }
+      });
     });
   }
 }
