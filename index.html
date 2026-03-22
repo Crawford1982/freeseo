@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -738,6 +738,48 @@
       margin-top: 14px;
     }
 
+    /* ─── EMAIL CAPTURE ─────────────────────────────────────── */
+    .email-capture {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    @media (max-width: 600px) { .email-capture { padding: 24px 20px; } }
+    .email-capture-icon { font-size: 28px; margin-bottom: 12px; }
+    .email-capture h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .email-capture p {
+      font-size: 14px; color: var(--muted);
+      max-width: 360px; margin: 0 auto 20px; line-height: 1.5;
+    }
+    .email-form { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; }
+    @media (max-width: 540px) { .email-form { flex-direction: column; } }
+    .email-form input[type="email"] {
+      flex: 1; padding: 12px 16px;
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif; font-size: 15px;
+      color: var(--ink); background: var(--paper);
+      outline: none; transition: border-color 0.2s;
+    }
+    .email-form input[type="email"]:focus { border-color: var(--accent2); background: #fff; }
+    .btn-email {
+      padding: 12px 20px; background: var(--ink); color: var(--paper);
+      border: none; border-radius: var(--radius);
+      font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+      cursor: pointer; white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .btn-email:hover { background: var(--accent); }
+    .email-form-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+    .email-success { display: none; color: var(--good); font-weight: 600; font-size: 15px; margin-top: 12px; }
+
     /* Restart button */
     .btn-restart {
       display: flex;
@@ -1014,6 +1056,26 @@
     </div>
 
     <!-- CTA (you help them — no selling their details) -->
+    <!-- EMAIL CAPTURE — powered by Formspree -->
+    <!-- SETUP: Go to formspree.io → create free account → New Form → copy your form ID and replace YOUR_FORM_ID below -->
+    <div class="email-capture" id="emailCapture">
+      <div class="email-capture-icon">📬</div>
+      <h3>Email me this report</h3>
+      <p>Get a copy of your audit results in your inbox — plus a short plain-English guide on what to fix first.</p>
+      <form class="email-form" id="emailCaptureForm"
+            action="https://formspree.io/f/YOUR_FORM_ID"
+            method="POST">
+        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+        <input type="hidden" name="business_name" id="hiddenBusiness">
+        <input type="hidden" name="website_url" id="hiddenUrl">
+        <input type="hidden" name="audit_score" id="hiddenScore">
+        <input type="hidden" name="_subject" value="New MySiteAudit lead">
+        <button type="submit" class="btn-email">Send it →</button>
+      </form>
+      <p class="email-form-note">No spam. Unsubscribe any time. We never share your details.</p>
+      <div class="email-success" id="emailSuccess">✓ Sent! Check your inbox in the next few minutes.</div>
+    </div>
+
     <div class="cta-section" id="ctaSection">
       <span class="cta-label">Want someone to fix this?</span>
       <h2 id="ctaHeadline">Your website needs work</h2>
@@ -1095,22 +1157,33 @@
     <div class="resources-grid">
       <div class="resource-card">
         <a href="https://business.google.com" target="_blank" rel="noopener">Google Business Profile</a>
-        <p>Claim and manage your free listing. The single biggest lever for local search.</p>
+        <p>Free. Claim and verify your listing — the single most important step for appearing in Google Maps.</p>
       </div>
       <div class="resource-card">
-        <a href="https://pagespeed.web.dev" target="_blank" rel="noopener">PageSpeed Insights</a>
-        <p>See how fast your site loads on mobile and desktop. Use alongside this audit.</p>
+        <!-- AFFILIATE: Sign up at brightlocal.com/affiliates/ then replace this href with your tracking link -->
+        <a href="https://www.brightlocal.com/" target="_blank" rel="noopener sponsored">BrightLocal</a>
+        <p>The UK's most popular local SEO platform. Track rankings, audit citations, and manage reviews. Free 14-day trial.</p>
+      </div>
+      <div class="resource-card">
+        <!-- AFFILIATE: Sign up at semrush.com/company/partners/affiliates/ then replace this href -->
+        <a href="https://www.semrush.com/" target="_blank" rel="noopener sponsored">Semrush</a>
+        <p>All-in-one SEO toolkit. Find the keywords your competitors rank for and close the gap. Free account available.</p>
       </div>
       <div class="resource-card">
         <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console</a>
-        <p>Free. See how Google sees your site and which queries bring impressions.</p>
+        <p>Free. See exactly how Google crawls your site and which search queries bring you traffic.</p>
       </div>
       <div class="resource-card">
-        <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Rich Results Test</a>
-        <p>Check if your schema/LocalBusiness markup is valid. Fix errors there.</p>
+        <!-- AFFILIATE: Sign up at whitespark.ca/affiliates/ then replace this href -->
+        <a href="https://whitespark.ca/" target="_blank" rel="noopener sponsored">Whitespark</a>
+        <p>Find and fix your local citation gaps — the directory listings that build Google's trust in your business.</p>
+      </div>
+      <div class="resource-card">
+        <a href="https://pagespeed.web.dev" target="_blank" rel="noopener">PageSpeed Insights</a>
+        <p>Free Google tool. Check your site speed on mobile and desktop — scores under 70 hurt your rankings.</p>
       </div>
     </div>
-    <p class="affiliate-note">We're not paid to list these — they're free official tools. If we add affiliate links in future we'll say so clearly.</p>
+    <p class="affiliate-note">Some links above are affiliate links — we may earn a small commission if you sign up, at no cost to you. We only recommend tools we'd genuinely point a client towards.</p>
   </div>
 </section>
 
@@ -1118,9 +1191,9 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span class="footer-copy">© 2025 MySiteAudit. Free to use, always. We never sell or share your data.</span>
+      <span class="footer-copy">© 2026 MySiteAudit. Free to use, always. We never sell or share your data.</span>
       <div class="footer-links">
-        <a href="/blog.html">Guides</a>
+        <a href="/blog/">Guides</a>
         <a href="mailto:help@mysiteaudit.co.uk">Contact</a>
         <a href="#privacy">Privacy</a>
       </div>
@@ -1491,8 +1564,29 @@ async function runLocalSignalsCheck(url, businessName, location) {
           'Missing Open Graph tags mean your site looks poor when shared on Facebook, WhatsApp, and other platforms.',
           'Add og:title, og:description, and og:image tags');
       } else {
-        addIssue('good', 'seo', 'Open Graph tags present',
-          'Your site will display correctly when shared on social media.');
+        // Check og:image URL actually resolves
+        const ogImageMeta = doc.querySelector('meta[property="og:image"]');
+        const ogImageUrl = ogImageMeta ? ogImageMeta.getAttribute('content') : null;
+        if (ogImageUrl) {
+          try {
+            const imgRes = await fetch(PROXY_URL + '?url=' + encodeURIComponent(ogImageUrl), { signal: AbortSignal.timeout(5000) });
+            if (imgRes.ok) {
+              addIssue('good', 'seo', 'Open Graph tags present',
+                'Your site will display correctly when shared on social media.');
+            } else {
+              addIssue('warn', 'seo', 'Open Graph image missing',
+                'Your og:image tag exists but the image URL returns a 404. Social media previews will show a broken image.',
+                'Create and upload the og:image file referenced in your meta tags');
+            }
+          } catch(e) {
+            addIssue('good', 'seo', 'Open Graph tags present',
+              'Your site will display correctly when shared on social media.');
+          }
+        } else {
+          addIssue('warn', 'seo', 'Open Graph image missing',
+            'You have some OG tags but no og:image. Social shares will have no image preview.',
+            'Add a meta property="og:image" tag pointing to a 1200×630px image');
+        }
       }
     }
   } catch(e) {}
@@ -1680,6 +1774,33 @@ function setupShareButtons(score, businessName) {
         setTimeout(function() { copyEl.textContent = 'Copy link'; }, 2000);
       });
     };
+  }
+
+  // Populate email capture hidden fields with audit data
+  const hiddenBusiness = document.getElementById('hiddenBusiness');
+  const hiddenUrl = document.getElementById('hiddenUrl');
+  const hiddenScore = document.getElementById('hiddenScore');
+  if (hiddenBusiness) hiddenBusiness.value = auditData.businessName || '';
+  if (hiddenUrl) hiddenUrl.value = auditData.url || '';
+  if (hiddenScore) hiddenScore.value = auditData.overallScore || '';
+
+  // Formspree AJAX submission (no page reload)
+  const emailForm = document.getElementById('emailCaptureForm');
+  const emailSuccess = document.getElementById('emailSuccess');
+  if (emailForm) {
+    emailForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(emailForm);
+      fetch(emailForm.action, {
+        method: 'POST', body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res) {
+        if (res.ok) {
+          emailForm.style.display = 'none';
+          if (emailSuccess) emailSuccess.style.display = 'block';
+        }
+      }).catch(function() {});
+    });
   }
 }
 

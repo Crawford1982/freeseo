@@ -2,26 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mysiteaudit.co.uk/</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://mysiteaudit.co.uk/blog/</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mysiteaudit.co.uk/blog/what-is-nap-consistency</loc>
+    <loc>https://mysiteaudit.co.uk/blog/what-is-nap-consistency/</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-plumbing-business-on-google</loc>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-plumbing-business-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-restaurant-showing-on-google</loc>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-restaurant-showing-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-electrician-business-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-dental-practice-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-estate-agency-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-hair-salon-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-building-company-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-solicitors-firm-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-accountancy-firm-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mysiteaudit.co.uk/blog/why-isnt-my-roofing-company-on-google/</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
