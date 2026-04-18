@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free My Site Audit — Audit My Site for Local SEO (UK) | MySiteAudit</title>
+  <title>Free My Site Audit — Local SEO Check (UK) | MySiteAudit</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-F64SZ9XW3X"></script>
   <script>
@@ -13,14 +13,14 @@
 
     gtag('config', 'G-F64SZ9XW3X');
   </script>
-  <meta name="description" content="Free my site audit in 30 seconds — audit my site for speed, mobile, Google Business Profile signals & technical SEO. No signup. Free site audit tool for UK small businesses.">
+  <meta name="description" content="Free my site audit in 30s: speed, mobile, GBP signals &amp; technical SEO. No signup. UK small businesses — run the free site audit tool now.">
   <meta name="keywords" content="my site audit, audit my site, free site audit, site audit, free local SEO audit, Google Business Profile, small business SEO">
   <link rel="canonical" href="https://mysiteaudit.co.uk/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Free My Site Audit — Local SEO Check in 30 Seconds | MySiteAudit">
-  <meta property="og:description" content="Audit my site for free: speed, mobile, local SEO & technical checks. No signup. Built for UK small businesses.">
+  <meta property="og:title" content="Free My Site Audit — Local SEO in 30 Seconds | MySiteAudit">
+  <meta property="og:description" content="Free my site audit: speed, mobile &amp; local SEO. No signup. UK small businesses.">
   <meta property="og:url" content="https://mysiteaudit.co.uk/">
   <meta property="og:image" content="https://mysiteaudit.co.uk/og-image.png">
   <meta property="og:locale" content="en_GB">
@@ -1245,6 +1245,12 @@ const PROXY_URL = 'https://seofree.1982crawford.workers.dev/fetch';
 // In Formspree: add https://mysiteaudit.co.uk (and localhost for testing) under Form settings → Restrict to domain.
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkoqlgpe';
 
+/** GA4 custom events — mark audit_completed, email_report_submitted, contact_click as conversions in GA4 Admin */
+function gaEvent(name, params) {
+  if (typeof gtag !== 'function') return;
+  gtag('event', name, params || {});
+}
+
 // ─── STATE ───────────────────────────────────────────────────
 let auditData = {};
 
@@ -1263,6 +1269,8 @@ async function runAudit() {
   showLoading();
 
   auditData = { businessName, location, url, issues: [], categories: {} };
+
+  gaEvent('audit_started', { url_host: (function () { try { return new URL(url).hostname; } catch (_) { return ''; } })() });
 
   try {
     // Run all checks concurrently where possible
@@ -1296,6 +1304,7 @@ async function runAudit() {
 
   } catch (err) {
     console.error(err);
+    gaEvent('audit_failed', { message: String(err && err.message ? err.message : 'unknown') });
     hideLoading();
     showError('Something went wrong. Please check the URL and try again.');
   }
@@ -1785,6 +1794,12 @@ function showResults() {
   document.getElementById('results').classList.add('visible');
 
   setupShareButtons(score, name);
+
+  gaEvent('audit_completed', {
+    score: typeof score === 'number' ? score : undefined,
+    issue_count: Array.isArray(auditData.issues) ? auditData.issues.length : undefined,
+  });
+
   // Scroll to results
   document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -1802,13 +1817,23 @@ function setupShareButtons(score, businessName) {
   const copyEl = document.getElementById('shareCopy');
   if (twitterEl) twitterEl.href = twitterUrl;
   if (linkedInEl) linkedInEl.href = linkedInUrl;
-  if (copyEl) {
-    copyEl.onclick = function() {
+  if (copyEl && !copyEl.dataset.shareBound) {
+    copyEl.dataset.shareBound = '1';
+    copyEl.addEventListener('click', function () {
+      gaEvent('share_results_click', { method: 'copy_link' });
       navigator.clipboard.writeText(window.location.href).then(function() {
         copyEl.textContent = 'Copied!';
         setTimeout(function() { copyEl.textContent = 'Copy link'; }, 2000);
       });
-    };
+    });
+  }
+  if (twitterEl && !twitterEl.dataset.gaShareBound) {
+    twitterEl.dataset.gaShareBound = '1';
+    twitterEl.addEventListener('click', function () { gaEvent('share_results_click', { method: 'twitter' }); });
+  }
+  if (linkedInEl && !linkedInEl.dataset.gaShareBound) {
+    linkedInEl.dataset.gaShareBound = '1';
+    linkedInEl.addEventListener('click', function () { gaEvent('share_results_click', { method: 'linkedin' }); });
   }
 
   // Populate email capture hidden fields with audit data
@@ -1833,6 +1858,7 @@ function setupShareButtons(score, businessName) {
         headers: { 'Accept': 'application/json' }
       }).then(function(res) {
         if (res.ok) {
+          gaEvent('email_report_submitted');
           emailForm.style.display = 'none';
           if (emailSuccess) emailSuccess.style.display = 'block';
         } else if (emailSuccess) {
@@ -2041,6 +2067,32 @@ function resetTool() {
 
   auditData = {};
 }
+
+// ─── GA4: contact, affiliate & blog links (delegated) ─────────
+document.addEventListener('DOMContentLoaded', function () {
+  document.body.addEventListener('click', function (e) {
+    const a = e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (href.indexOf('mailto:') === 0) {
+      let loc = 'other';
+      if (a.closest('#ctaSection')) loc = 'results_cta';
+      else if (a.closest('footer')) loc = 'footer';
+      gaEvent('contact_click', { location: loc });
+      return;
+    }
+    const rel = a.getAttribute('rel') || '';
+    if (/^https?:\/\//i.test(href) && rel.indexOf('sponsored') !== -1) {
+      try {
+        gaEvent('affiliate_outbound_click', { link_url: a.href, link_domain: new URL(a.href).hostname.replace(/^www\./, '') });
+      } catch (_) {}
+      return;
+    }
+    if (href.indexOf('/blog') === 0) {
+      gaEvent('blog_cta_click', { link_path: href });
+    }
+  });
+});
 
 // ─── ENTER KEY ───────────────────────────────────────────────
 document.addEventListener('keydown', (e) => {

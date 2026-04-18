@@ -70,3 +70,44 @@ You only need **two** things for the audit to work end-to-end.
 | Formspree form URL | formspree.io → copy form endpoint | `index.html` → `FORMSPREE_ENDPOINT` |
 
 After setting the Worker + PSI key, run an audit for full speed + on-page + local checks. Add Formspree when you want email capture from the results screen.
+
+---
+
+## 4. GA4 custom events (measurement)
+
+**What it does:** The site fires named events so you can see funnel behaviour, not just pageviews.
+
+**Events fired from the homepage (`index.html`):**
+
+| Event | When |
+|--------|------|
+| `audit_started` | User submitted the audit form with a valid URL |
+| `audit_completed` | Report rendered (includes `score`, `issue_count`) |
+| `audit_failed` | Uncaught error during the audit |
+| `email_report_submitted` | Formspree accepted the email capture |
+| `contact_click` | `mailto:` link (footer vs results CTA via `location`) |
+| `share_results_click` | X, LinkedIn, or copy link (`method`) |
+| `affiliate_outbound_click` | Sponsored resource links (`link_url`, `link_domain`) |
+| `blog_cta_click` | Any internal link starting with `/blog` |
+
+**Events from blog/guide pages (`analytics-events.js`):**
+
+| Event | When |
+|--------|------|
+| `blog_cta_click` | “Free Audit” style links to homepage (`nav-cta`, `btn-cta`) |
+| `blog_internal_navigation` | Link to another `/blog/...` URL |
+| `affiliate_outbound_click` | Same as homepage for `rel="sponsored"` |
+| `contact_click` | `mailto:` from a guide page |
+
+**In GA4:** Admin → Events → mark as **Key events**: `audit_completed`, `email_report_submitted`, `contact_click` (adjust to taste). Optionally link **Search Console** to GA4 for query reporting.
+
+---
+
+## 5. URL redirects (optional — kill duplicate blog URLs)
+
+GitHub Pages alone cannot 301 `/blog` → `/blog/`. If you use **Cloudflare** in front of the site, add **Redirect Rules** (or bulk redirects):
+
+- `https://mysiteaudit.co.uk/blog` → `https://mysiteaudit.co.uk/blog/` (301)  
+- `https://mysiteaudit.co.uk/blog.html` → `https://mysiteaudit.co.uk/blog/` (301)
+
+The repo includes **`blog.html`** with `noindex`, canonical, and `location.replace` to `/blog/` as a fallback for old links.
