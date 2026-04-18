@@ -111,3 +111,10 @@ GitHub Pages alone cannot 301 `/blog` → `/blog/`. If you use **Cloudflare** in
 - `https://mysiteaudit.co.uk/blog.html` → `https://mysiteaudit.co.uk/blog/` (301)
 
 The repo includes **`blog.html`** with `noindex`, canonical, and `location.replace` to `/blog/` as a fallback for old links.
+
+**Also in the repo:**
+
+| File | Purpose |
+|------|---------|
+| `.nojekyll` | **GitHub Pages**: skip Jekyll so `_` paths and assets behave predictably. |
+| `_redirects` | **Netlify** (and similar): 301 `/blog` and `/blog.html` → `/blog/`. Ignored by GitHub Pages — use Cloudflare redirect rules for production if needed. |

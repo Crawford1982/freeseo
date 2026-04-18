@@ -1,0 +1,3 @@
+# Netlify / compatible hosts — 301 consolidate blog URL variants (GitHub Pages ignores this file)
+/blog   /blog/   301
+/blog.html   /blog/   301
