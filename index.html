@@ -13,7 +13,7 @@
 
     gtag('config', 'G-F64SZ9XW3X');
   </script>
-  <meta name="description" content="Free site audit in 30s — speed, mobile, local SEO, Google Business Profile &amp; technical checks. Free my site audit: no signup, no card. UK small businesses. Audit my site now.">
+  <meta name="description" content="Free local visibility audit for UK small businesses. Check website speed, mobile, local SEO, Google Business Profile signals and get a plain-English action plan.">
   <meta name="keywords" content="my site audit, audit my site, free site audit, site audit, free local SEO audit, Google Business Profile, small business SEO">
   <link rel="canonical" href="https://mysiteaudit.co.uk/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -1017,6 +1017,14 @@
             <label for="websiteUrl">Website URL</label>
             <input type="url" id="websiteUrl" placeholder="https://yourwebsite.com" autocomplete="url">
           </div>
+          <div class="field">
+            <label for="leadEmail">Email for the action plan <span style="color:var(--muted);font-weight:500;">(optional)</span></label>
+            <input type="email" id="leadEmail" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="leadGoal">What do you want more of?</label>
+            <input type="text" id="leadGoal" placeholder="Calls, bookings, quote requests..." autocomplete="off">
+          </div>
         </div>
 
         <button class="btn-audit" id="runAuditBtn" onclick="runAudit()">
@@ -1025,7 +1033,7 @@
         </button>
 
         <div class="error-box" id="errorBox"></div>
-        <p class="form-note">We never sell your data or pass your details to third parties.</p>
+        <p class="form-note">Instant score first. If you add an email, it is only used to send the action plan or reply to your request.</p>
       </div>
 
       <!-- LOADING -->
@@ -1092,8 +1100,10 @@
         <input type="hidden" name="business_name" id="hiddenBusiness">
         <input type="hidden" name="website_url" id="hiddenUrl">
         <input type="hidden" name="audit_score" id="hiddenScore">
-        <input type="hidden" name="_subject" value="New MySiteAudit lead">
-        <button type="submit" class="btn-email">Send it →</button>
+        <input type="hidden" name="town_city" id="hiddenLocation">
+        <input type="hidden" name="growth_goal" id="hiddenGoal">
+        <input type="hidden" name="_subject" value="New MySiteAudit action plan request">
+        <button type="submit" class="btn-email">Send action plan</button>
       </form>
       <p class="email-form-note">No spam. Unsubscribe any time. We never share your details.</p>
       <div class="email-success" id="emailSuccess">✓ Sent! Check your inbox in the next few minutes.</div>
@@ -1103,8 +1113,8 @@
       <span class="cta-label">Want someone to fix this?</span>
       <h2 id="ctaHeadline">Your website needs work</h2>
       <p id="ctaBody">I build fast, professional websites for local businesses — starting from £499. Usually live within a week. Your details stay with you; I never sell or pass them on.</p>
-      <a href="mailto:help@mysiteaudit.co.uk?subject=MySiteAudit%20Audit%20%E2%80%94%20I%20need%20help" class="btn-cta">
-        Get in touch for a free quote →
+      <a href="mailto:help@mysiteaudit.co.uk?subject=MySiteAudit%20Audit%20-%20I%20need%20help" class="btn-cta" id="fixThisCta">
+        Ask me to fix this
       </a>
       <p class="cta-note">No obligation. Tell me your URL and I'll say what I'd do — no spam, no sharing your data.</p>
       <div class="share-row" id="shareRow">
@@ -1182,6 +1192,10 @@
       <a href="/blog/why-isnt-my-solicitors-firm-on-google/">Solicitors firm not on Google?</a>
       <a href="/blog/why-isnt-my-accountancy-firm-on-google/">Accountancy firm not on Google?</a>
       <a href="/blog/why-isnt-my-roofing-company-on-google/">Roofing company not on Google?</a>
+      <a href="/local-seo-falkirk/">Local SEO Falkirk audit</a>
+      <a href="/website-audit-for-trades/">Website audit for trades</a>
+      <a href="/google-business-profile-audit/">Google Business Profile audit</a>
+      <a href="/small-business-website-audit-uk/">Small business website audit UK</a>
       <a href="/blog/">All local SEO guides →</a>
     </nav>
   </div>
@@ -1307,6 +1321,8 @@ async function runAudit() {
   const businessName = document.getElementById('businessName').value.trim();
   const location     = document.getElementById('location').value.trim();
   const websiteUrl   = document.getElementById('websiteUrl').value.trim();
+  const leadEmail    = (document.getElementById('leadEmail') || {}).value?.trim() || '';
+  const leadGoal     = (document.getElementById('leadGoal') || {}).value?.trim() || '';
 
   // Validation
   if (!websiteUrl) return showError('Please enter your website URL.');
@@ -1316,9 +1332,13 @@ async function runAudit() {
   hideError();
   showLoading();
 
-  auditData = { businessName, location, url, issues: [], categories: {} };
+  auditData = { businessName, location, url, leadEmail, leadGoal, issues: [], categories: {} };
 
-  gaEvent('audit_started', { url_host: (function () { try { return new URL(url).hostname; } catch (_) { return ''; } })() });
+  gaEvent('audit_started', {
+    url_host: (function () { try { return new URL(url).hostname; } catch (_) { return ''; } })(),
+    has_email: !!leadEmail,
+    has_goal: !!leadGoal
+  });
 
   try {
     // Run all checks concurrently where possible
@@ -1888,13 +1908,48 @@ function setupShareButtons(score, businessName) {
   const hiddenBusiness = document.getElementById('hiddenBusiness');
   const hiddenUrl = document.getElementById('hiddenUrl');
   const hiddenScore = document.getElementById('hiddenScore');
+  const hiddenLocation = document.getElementById('hiddenLocation');
+  const hiddenGoal = document.getElementById('hiddenGoal');
   if (hiddenBusiness) hiddenBusiness.value = auditData.businessName || '';
   if (hiddenUrl) hiddenUrl.value = auditData.url || '';
   if (hiddenScore) hiddenScore.value = (auditData.finalScore != null ? String(auditData.finalScore) : '');
+  if (hiddenLocation) hiddenLocation.value = auditData.location || '';
+  if (hiddenGoal) hiddenGoal.value = auditData.leadGoal || '';
 
-  // Formspree AJAX submission (no page reload)
   const emailForm = document.getElementById('emailCaptureForm');
   const emailSuccess = document.getElementById('emailSuccess');
+  const emailInput = emailForm ? emailForm.querySelector('input[name="email"]') : null;
+  if (emailInput && auditData.leadEmail) emailInput.value = auditData.leadEmail;
+
+  const fixCta = document.getElementById('fixThisCta');
+  if (fixCta) {
+    const subject = encodeURIComponent('MySiteAudit Audit - I need help');
+    const body = encodeURIComponent([
+      'Hi,',
+      '',
+      'I ran a MySiteAudit report and would like help fixing the issues.',
+      '',
+      `Business: ${auditData.businessName || ''}`,
+      `Location: ${auditData.location || ''}`,
+      `Website: ${auditData.url || ''}`,
+      `Score: ${auditData.finalScore != null ? auditData.finalScore + '/100' : ''}`,
+      `Goal: ${auditData.leadGoal || ''}`,
+      '',
+      'Can you tell me what you would fix first?'
+    ].join('\n'));
+    fixCta.href = `mailto:help@mysiteaudit.co.uk?subject=${subject}&body=${body}`;
+    if (!fixCta.dataset.gaBound) {
+      fixCta.dataset.gaBound = '1';
+      fixCta.addEventListener('click', function () {
+        gaEvent('fix_this_cta_click', {
+          score: auditData.finalScore,
+          url_host: (function () { try { return new URL(auditData.url).hostname; } catch (_) { return ''; } })()
+        });
+      });
+    }
+  }
+
+  // Formspree AJAX submission (no page reload)
   if (emailForm && !emailForm.dataset.spreeBound) {
     emailForm.dataset.spreeBound = '1';
     emailForm.setAttribute('action', FORMSPREE_ENDPOINT);
@@ -1906,7 +1961,11 @@ function setupShareButtons(score, businessName) {
         headers: { 'Accept': 'application/json' }
       }).then(function(res) {
         if (res.ok) {
-          gaEvent('email_report_submitted');
+          gaEvent('lead_submitted', {
+            source: 'email_action_plan',
+            score: auditData.finalScore,
+            has_goal: !!auditData.leadGoal
+          });
           emailForm.style.display = 'none';
           if (emailSuccess) emailSuccess.style.display = 'block';
         } else if (emailSuccess) {
