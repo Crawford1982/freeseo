@@ -2,7 +2,26 @@
 
 Last reviewed with codebase changes: GA4 events, canonical fixes, blog GA parity, tighter homepage meta, `analytics-events.js`, redirect documentation, Organization + WebApplication schema, `.nojekyll`, `_redirects` for Netlify-compatible hosts.
 
-## Done in this pass
+## September 2026 — CTR & Monetization Improvements
+
+**Context**: Search Console showed 0.3% CTR with avg position 22.8. Goal was to improve SERP click-through and make the £499 monetization path clearer without breaking the free tool.
+
+**Shipped**:
+- [x] **SERP Title**: Changed from "Free Local SEO Audit for UK Small Businesses" to "Why Is My Site Not Showing on Google? Free UK SEO Audit" — directly addresses #1 search intent
+- [x] **Meta Description**: More action-oriented: "Find out why your business isn't appearing on Google or Maps. Free 30-second site audit for UK small businesses. No signup required."
+- [x] **H1**: Now "Why Isn't My Business Showing on Google?" — matches user query intent
+- [x] **Hero Subhead**: Enhanced clarity about what users get and UK focus
+- [x] **Monetization CTAs Strengthened**: 
+  - Main CTA headline: "Get a Fast, SEO-Optimised Website — From £499"
+  - Button: "Get Your Free Quote →" (was "Ask me to fix this")
+  - All 3 score-tier CTAs rewritten to emphasize outcomes: "fixes issues and gets you showing on Google"
+  - Clearer value prop and next steps
+- [x] **Open Graph**: Updated title/description for social sharing CTR
+- [x] **Sitemap**: Homepage lastmod → 2026-09-07 to signal fresh content
+
+**Expected Impact**: Higher SERP CTR from pain-point title, lower friction to £499 quote via clearer outcome promises.
+
+## Done in previous passes
 
 - [x] GA4: `audit_started`, `audit_completed`, `audit_failed`, `email_report_submitted`, `contact_click`, `share_results_click`, `affiliate_outbound_click`, `blog_cta_click`
 - [x] Blog pages: shared `analytics-events.js` (`blog_cta_click`, `blog_internal_navigation`, `contact_click`, `affiliate_outbound_click`)
