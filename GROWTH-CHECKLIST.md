@@ -2,6 +2,43 @@
 
 Last reviewed with codebase changes: GA4 events, canonical fixes, blog GA parity, tighter homepage meta, `analytics-events.js`, redirect documentation, Organization + WebApplication schema, `.nojekyll`, `_redirects` for Netlify-compatible hosts.
 
+## September 2026 — GSC CTR Optimization & GA4 Event Fixes
+
+**Context**: Real Google Search Console data (10 Aug–6 Sep 2026) showed 2 clicks, 3.17k impressions, 0.1% CTR, avg position 55.5. Top pages with high impressions but low CTR needed title/meta optimization. GA4 custom events (audit_completed, email_report_submitted, contact_click) weren't appearing—event naming mismatch found and fixed.
+
+**GSC Snapshot (10 Aug–6 Sep 2026)**:
+- **Totals**: 2 clicks, 3,170 impressions, 0.1% CTR, avg position 55.5
+- **Top pages by impression**:
+  - `/blog/what-is-nap-consistency/` — 484 impr, 1 click, 0.2% CTR, pos 50.5
+  - `/blog/why-isnt-my-estate-agency-on-google/` — 105 impr, 1 click, 1% CTR, pos 23.3
+  - `/` (homepage) — 1,651 impr, 0 clicks, 0% CTR, pos 80.9
+  - `/blog/why-isnt-my-restaurant-showing-on-google/` — 297 impr, 0 clicks, 0% CTR, **pos 11.4** ⭐
+  - `/blog/why-isnt-my-plumbing-business-on-google/` — 167 impr, 0 clicks, 0% CTR, **pos 12.2** ⭐
+  - `/blog/why-isnt-my-hair-salon-on-google/` — 152 impr, 0 clicks, 0% CTR, **pos 12.0** ⭐
+  - building (140 impr, pos 28), dental (118, pos 23), accountancy (55, pos 25)
+- **Top queries** (all 0 clicks): site audit (553 impr pos 86), nap seo (157), site audits (130), nap listings (86), website audit lichfield (86), audit my site (85), nap information (72), site audit services (66), plus city audits, estate agents not on rightmove (31 impr pos 25.8)
+- **GA4 issue**: Custom events audit_completed, email_report_submitted, contact_click not appearing—only first_visit, page_view, session_start, user_engagement showing.
+
+**Shipped 8 September 2026**:
+- [x] **CTR title/meta optimization** for high-impression low-CTR pages:
+  - Restaurant guide: "Why Isn't My Restaurant Showing on Google? 6 UK Fixes" (was "Restaurant Not on Google Maps? 6 UK Fixes...")
+  - Plumbing guide: "Why Isn't My Plumbing Business on Google? 7 UK Fixes" (was "Plumber Not Showing on Google? 7 UK Fixes...")
+  - Hair salon guide: "Why Isn't My Hair Salon Showing on Google? 7 UK Fixes"
+  - NAP guide: "What Is NAP Consistency? (And Why It's Killing Your Google Rankings)"
+  - Estate agency guide: "Why Isn't My Estate Agency on Google? 7 UK Fixes"
+  - Homepage: "Why Isn't My Business on Google? Free UK Site Audit"
+  - All meta descriptions shortened to ~120 chars, query-focused ("not on Google Maps", "not showing", "proven UK fixes")
+- [x] **GA4 event fix**: Changed `lead_submitted` to `email_report_submitted` in homepage Formspree handler (line ~2007) so GA4 receives the correct event name matching the comment and GA4 Admin setup
+- [x] **Internal links from homepage**: Added contextual paragraph in "What we check" section linking to restaurant, plumbing, and hair salon guides (the three with positions 11-12 per GSC) to consolidate topical relevance
+- [x] **Sitemap lastmods** updated to 2026-09-08 for: homepage, restaurant, plumbing, hair salon, NAP, estate agency guides
+
+**Expected Impact**: 
+- CTR should improve for pages ranking 11-14 (restaurant, plumbing, hair salon) with query-matching titles
+- GA4 events will now appear correctly in reports and can be marked as conversions in GA4 Admin
+- Internal links from homepage to top-ranking guides should pass authority and improve click depth
+
+**Next check**: Wait 2-4 weeks then compare GSC CTR and average position for the six optimized pages.
+
 ## September 2026 — Weeks 1–6 Growth Plan Implementation
 
 **Context**: James green-lit implementing weeks 1–6 of the growth plan. This iteration deepens the top 3 trade guides with UK-specific content (not boilerplate), polishes the 3 hub pages to be crawl-worthy, improves the lead loop with better expectation-setting, and updates the sitemap.
