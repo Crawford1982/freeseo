@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Why Is My Site Not Showing on Google? Free UK SEO Audit | MySiteAudit</title>
+  <title>Why Isn't My Business on Google? Free UK Site Audit | MySiteAudit</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-F64SZ9XW3X"></script>
   <script>
@@ -13,7 +13,7 @@
 
     gtag('config', 'G-F64SZ9XW3X');
   </script>
-  <meta name="description" content="Find out why your business isn't appearing on Google or Maps. Free 30-second site audit for UK small businesses — check speed, mobile, local SEO issues. No signup required.">
+  <meta name="description" content="Find out why you're not on Google or Maps. Free 30-second site audit for UK businesses—check speed, mobile, local SEO. No signup.">
   <meta name="keywords" content="my site audit, audit my site, free site audit, site audit, free local SEO audit, Google Business Profile, small business SEO">
   <link rel="canonical" href="https://mysiteaudit.co.uk/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -1212,6 +1212,7 @@
         <li>Technical SEO basics: canonical and Open Graph, JSON-LD and common schema, sitemap / robots if exposed.</li>
         <li>Local visibility: Google Business Profile alignment, contact block and NAP consistency, location wording.</li>
       </ul>
+      <p>Common issues we help UK businesses fix: <a href="/blog/why-isnt-my-restaurant-showing-on-google/">restaurants not appearing on Google Maps</a>, <a href="/blog/why-isnt-my-plumbing-business-on-google/">plumbers missing from local search</a>, and <a href="/blog/why-isnt-my-hair-salon-on-google/">hair salons not showing in "near me" searches</a>. Each guide includes the exact fixes that work.</p>
       <p>Run the check above, then use our <a href="#guides">industry guides</a> if a specific &ldquo;not on Google / Maps&rdquo; problem still applies. Enter your URL in the form to get a free local SEO audit in under a minute.</p>
       <p class="seo-pillar-cta"><a href="#auditCard">Run the free site audit →</a></p>
     </div>
@@ -2004,7 +2005,7 @@ function setupShareButtons(score, businessName) {
         headers: { 'Accept': 'application/json' }
       }).then(function(res) {
         if (res.ok) {
-          gaEvent('lead_submitted', {
+          gaEvent('email_report_submitted', {
             source: 'email_action_plan',
             score: auditData.finalScore,
             has_goal: !!auditData.leadGoal
