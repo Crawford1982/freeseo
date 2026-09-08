@@ -2,6 +2,30 @@
 
 Last reviewed with codebase changes: GA4 events, canonical fixes, blog GA parity, tighter homepage meta, `analytics-events.js`, redirect documentation, Organization + WebApplication schema, `.nojekyll`, `_redirects` for Netlify-compatible hosts.
 
+## September 2026 — Weeks 1–6 Growth Plan Implementation
+
+**Context**: James green-lit implementing weeks 1–6 of the growth plan. This iteration deepens the top 3 trade guides with UK-specific content (not boilerplate), polishes the 3 hub pages to be crawl-worthy, improves the lead loop with better expectation-setting, and updates the sitemap.
+
+**Shipped 8 September 2026**:
+- [x] **Deepened top 3 trade guides** with 400–700 words of unique UK/trade content each:
+  - Plumbing guide: Added UK-specific content on Checkatrade/Yell NAP consistency, Gas Safe registration visibility, GBP category specificity, emergency callout messaging, and authentic job photos vs stock images
+  - Electrician guide: Added UK-specific content on NICEIC/Part P registration visibility, emergency/24-7 GBP optimization, Checkatrade/Yell NAP consistency, service-area pages for hyper-local ranking, and authentic electrical work photos
+  - Restaurant guide: Added UK-specific content on TripAdvisor NAP consistency, delivery platform (Deliveroo/Uber Eats) conflicts, HTML menu vs PDF issues, Google Reserve booking integration, authentic food/interior photos vs stock, and Restaurant schema vs generic LocalBusiness
+- [x] **Mid-page CTAs added** to all 3 trade guides: "Run the free audit" primary CTA linking to homepage, secondary "Get a quote from £499" mailto with relevant subject line
+- [x] **Title/meta tightened** for all 3 guides for better UK-focused CTR (pain query targeting: "why isn't my [trade] showing on Google UK")
+- [x] **Updated dates** to September 2026 (dateModified in schema + visible "Updated" date)
+- [x] **Polished 3 hub pages** to be crawl-worthy:
+  - website-audit-for-trades: Added internal links to plumbing/electrician/builder/roofer guides, £499 quote CTA in success section
+  - google-business-profile-audit: Added internal link to NAP consistency guide, £499 quote CTA
+  - local-seo-falkirk: Added context for Falkirk/Grangemouth/surrounding areas, internal links to blog guides, £499 quote CTA
+- [x] **Lead loop improvements**:
+  - Homepage email capture success message now sets expectation: "You'll get the action plan and can reply for a free quote (websites from £499)"
+  - Created `LEAD-REPLY-TEMPLATE.md` in repo root: 3–5 line template James can use as Formspree auto-responder or manual reply (thanks, top fixes, £499 offer, no obligation)
+- [x] **Sitemap updated**: lastmod → 2026-09-08 for homepage, plumbing/electrician/restaurant guides, and all 3 hub pages
+- [x] **GROWTH-CHECKLIST.md updated** with this section
+
+**Expected Impact**: Deeper trade guides with unique UK content should improve dwell time and social sharing. Mid-page CTAs reduce friction to audit and £499 quote. Hub pages now have clear crawl paths from blog + homepage. Lead loop sets better expectations and makes £499 offer clearer upfront.
+
 ## September 2026 — CTR & Monetization Improvements
 
 **Context**: Search Console showed 0.3% CTR with avg position 22.8. Goal was to improve SERP click-through and make the £499 monetization path clearer without breaking the free tool.
