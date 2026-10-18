@@ -119,15 +119,22 @@
 
     .logo-text span { color: var(--accent); }
 
-    .header-tag {
-      font-size: 12px;
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-link {
+      font-size: 14px;
       font-weight: 500;
       color: var(--muted);
-      background: var(--cream);
-      border: 1px solid var(--border);
-      padding: 4px 12px;
-      border-radius: 20px;
-      letter-spacing: 0.3px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .header-link:hover {
+      color: var(--ink);
     }
 
     /* ─── HERO ─────────────────────────────────────────────── */
@@ -1026,7 +1033,10 @@
         <div class="logo-mark">MS</div>
         <span class="logo-text">My<span>SiteAudit</span></span>
       </a>
-      <span class="header-tag">Free · No signup</span>
+      <nav class="header-nav">
+        <a href="/blog/" class="header-link">Guides</a>
+        <a href="/about/" class="header-link">About</a>
+      </nav>
     </div>
   </div>
 </header>
@@ -1331,6 +1341,7 @@
       <span class="footer-copy">© 2026 MySiteAudit. Free to use, always. We never sell or share your data.</span>
       <div class="footer-links">
         <a href="/blog/">Guides</a>
+        <a href="/about/">About</a>
         <a href="mailto:help@mysiteaudit.co.uk">Contact</a>
         <a href="#privacy">Privacy</a>
       </div>

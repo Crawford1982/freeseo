@@ -81,7 +81,11 @@
     a:hover { color: var(--accent); }
     img { max-width: 100%; height: auto; }
     .site-nav { background: var(--ink); padding: 14px 0; }
-    .nav-inner { max-width: 780px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-inner { max-width: 780px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .nav-links { display: flex; align-items: center; gap: 16px; }
+    .nav-link { font-size: 13px; color: rgba(245,242,235,0.7); }
+    .nav-link:hover { color: #fff; }
     .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: var(--paper); text-decoration: none; }
     .nav-logo span { color: var(--accent); }
     .nav-cta { font-size: 13px; font-weight: 500; color: var(--paper); background: var(--accent); padding: 8px 16px; border-radius: 6px; text-decoration: none; transition: opacity 0.2s; }
@@ -181,7 +185,13 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">My<span>SiteAudit</span></a>
+    <div class="nav-left">
+      <a href="/" class="nav-logo">My<span>SiteAudit</span></a>
+      <div class="nav-links">
+        <a href="/blog/" class="nav-link">Guides</a>
+        <a href="/about/" class="nav-link">About</a>
+      </div>
+    </div>
     <a href="/" class="nav-cta">Free Audit →</a>
   </div>
 </nav>
@@ -437,6 +447,8 @@
     <footer class="article-footer">
       <nav class="footer-nav">
         <a href="/">Free SEO Audit</a>
+        <a href="/blog/">Guides</a>
+        <a href="/about/">About</a>
         <a href="/blog/">All Guides</a>
         <a href="/blog/why-isnt-my-electrician-business-on-google/">Why Isn't My Electrician Business on Google?</a>
         <a href="/blog/what-is-nap-consistency/">What Is NAP Consistency?</a>
